@@ -105,9 +105,9 @@ This package provides the function `itref` implementing LU-IR3 and GMRES-IR5. He
           ur=fp128
          );
 
-The function `itref` returns  the computed solution in precision (u), the backward and forward errors at each iteration, the total number of iterative refinement iterations for convergence, the cumulated number of GMRES iterations over the iterative refinement iterations, a boolean stating if the algorithm converges or not.
-
 **Example 4:** Calling `itref(A, b)` applies a fixed double precision LU-based iterative refinement.
+
+The function `itref` returns  the computed solution in precision (u), the backward and forward errors at each iteration, the total number of iterative refinement iterations for convergence, the cumulated number of GMRES iterations over the iterative refinement iterations, a boolean stating if the algorithm converges or not.
 
     xw, bkws, fwds, nit, ngmresit, cvg = itref(A, b; ...);
 
