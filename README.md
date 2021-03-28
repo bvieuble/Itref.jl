@@ -8,7 +8,7 @@
 This Julia package contains LU-based and GMRES-based iterative refinement 
 for the solution of square linear system
 
-<p align=center> Ax=b,   A∈ℝ<sup>n ✕ n</sup>,   b∈ℝ<sup>n</sup>. </p>
+<p align=center> Ax=b,&nbsp;&nbsp;&nbsp;&nbsp;A∈ℝ<sup>n ✕ n</sup>,&nbsp;&nbsp;&nbsp;&nbsp;b∈ℝ<sup>n</sup>. </p>
 
 It implements both LU-IR3 and GMRES-IR5 and allows a highly versatile choice of 
 arithmetic precision combinations. This code has been made for research purposes 
@@ -26,7 +26,7 @@ and is numerical oriented, meaning we did not consider performance issues.
    > &nbsp;&nbsp;&nbsp;&nbsp;Compute x<sub>i+1</sub> = x<sub>i</sub> + d<sub>i</sub> in precision (u)  
    > **end while**  
 
-   Thus u<sub>f</sub>, u<sub>r</sub>, and u are parameters. These parameters could be setted up to bfloat16 (bfloat, `using BFloat16s`<sup>[4](#myfootnote4)</sup>), fp16 (half), fp32 (single), fp64 (double), fp128 (quadruple, `using Quadmath`). It should be clear that bfloat16, fp16, and fp128 are simulated, this code does not use accelerators.
+   u<sub>f</sub>, u<sub>r</sub>, and u are the arithmetic precisions to set up. In Julia we can use the following arithmetic precisions: bfloat16 (bfloat, `using BFloat16s`<sup>[4](#myfootnote4)</sup>, type:`BFloat16`), fp16 (half, type:`Float16`), fp32 (single, type:`Float32`), fp64 (double, type:`Float64`), fp128 (quadruple, `using Quadmath`<sup>[5](#myfootnote5)</sup>, type:`Float128`). It should be clear that bfloat16, fp16, and fp128 are simulated, this code does not use accelerators.
 
 
 * **GMRES-IR5**  
@@ -60,8 +60,6 @@ This package provides the function `itref` implementing LU-IR3 and GMRES-IR5. He
                    ug       = uw,            # Precision ug
                    up       = ur             # Precision up
                   ) 
-
-Calling `itref(A, b)` applies a fixed double precision LU-based iterative refinement.
 
 **Example 1:** setup for GMRES-IR5 for computing a solution with a forward/backward errors of order 10<sup>-15</sup>, with GMRES solver in double precision except the preconditioning applied in quadruple precision, and a low tolerance. This is a good configuration for precision and robstness.
 
@@ -109,11 +107,13 @@ Calling `itref(A, b)` applies a fixed double precision LU-based iterative refine
 
 The function `itref` returns  the computed solution in precision (u), the backward and forward errors at each iteration, the total number of iterative refinement iterations for convergence, the cumulated number of GMRES iterations over the iterative refinement iterations, a boolean stating if the algorithm converges or not.
 
-    xw, bkw, fwd, nit, ngmresit, cvg = itref(A, b; ...);
+**Example 4:** Calling `itref(A, b)` applies a fixed double precision LU-based iterative refinement.
+
+    xw, bkws, fwds, nit, ngmresit, cvg = itref(A, b; ...);
 
 
 <a name="myfootnote1">1</a>: [Accelerating the Solution of Linear Systems by Iterative Refinement in Three Precisions](https://epubs.siam.org/doi/abs/10.1137/17M1140819)  
-<a name="myfootnote1">2</a>: [A New Analysis of Iterative Refinement and Its Application to Accurate Solution of Ill-Conditioned Sparse Linear Systems](https://epubs.siam.org/doi/abs/10.1137/17M1122918)  
+<a name="myfootnote2">2</a>: [A New Analysis of Iterative Refinement and Its Application to Accurate Solution of Ill-Conditioned Sparse Linear Systems](https://epubs.siam.org/doi/abs/10.1137/17M1122918)  
 <a name="myfootnote3">3</a>: Coming soon  
 <a name="myfootnote4">4</a>: [BFloat16s Julia package](https://github.com/JuliaMath/BFloat16s.jl)  
-
+<a name="myfootnote5">5</a>: [Quadmath Julia package](https://github.com/JuliaMath/Quadmath.jl)
