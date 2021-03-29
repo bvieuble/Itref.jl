@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/bvieuble/Itref.jl.svg?branch=master)](https://travis-ci.com/bvieuble/Itref.jl)
-[![codecov](https://codecov.io/gh/bvieuble/Itref.jl/branch/master/graph/badge.svg?token=8MJY6KCSS5)](https://codecov.io/gh/bvieuble/Itref.jl)
+[![Coverage Status](https://coveralls.io/repos/github/bvieuble/Itref.jl/badge.svg?branch=master)](https://coveralls.io/github/bvieuble/Itref.jl?branch=master)
 
 # Itref.jl: mixed-precision iterative refinement algorithms for Julia
 
