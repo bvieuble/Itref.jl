@@ -114,6 +114,6 @@ The function `itref` returns  the computed solution in precision (u), the backwa
 
 <a name="myfootnote1">1</a>: [Accelerating the Solution of Linear Systems by Iterative Refinement in Three Precisions](https://epubs.siam.org/doi/abs/10.1137/17M1140819)  
 <a name="myfootnote2">2</a>: [A New Analysis of Iterative Refinement and Its Application to Accurate Solution of Ill-Conditioned Sparse Linear Systems](https://epubs.siam.org/doi/abs/10.1137/17M1122918)  
-<a name="myfootnote3">3</a>: [Five-Precision GMRES-based iterative refinement](https://hal.archives-ouvertes.fr/hal-03190686)
+<a name="myfootnote3">3</a>: [Five-Precision GMRES-based iterative refinement](https://hal.archives-ouvertes.fr/hal-03190686)  
 <a name="myfootnote4">4</a>: [BFloat16s Julia package](https://github.com/JuliaMath/BFloat16s.jl)  
 <a name="myfootnote5">5</a>: [Quadmath Julia package](https://github.com/JuliaMath/Quadmath.jl)
