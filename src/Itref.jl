@@ -22,7 +22,7 @@ import Base: isinf, isnan
 
 function isinf(x::AbstractVector)
     found=false
-    for i = 1:size(x,1)
+    @inbounds for i = eachindex(x)
         if(isinf(x[i]))
             found=true
             break
@@ -33,7 +33,7 @@ end
 
 function isnan(x::AbstractVector)
     found=false
-    for i = 1:size(x,1)
+    @inbounds for i = eachindex(x)
         if(isnan(x[i]))
             found=true
             break
