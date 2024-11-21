@@ -22,7 +22,7 @@ import Base: isinf, isnan
 
 function isinf(x::AbstractVector)
     found=false
-    for i = 1:size(x,1)
+    @inbounds for i = eachindex(x)
         if(isinf(x[i]))
             found=true
             break
@@ -33,7 +33,7 @@ end
 
 function isnan(x::AbstractVector)
     found=false
-    for i = 1:size(x,1)
+    @inbounds for i = eachindex(x)
         if(isnan(x[i]))
             found=true
             break
@@ -125,7 +125,7 @@ function gmres(A::AbstractMatrix,
     end
 
     if(eltype(F) != up)
-        Fp = convert(LU{up,Array{up,2}}, F); 
+        Fp = convert(LU{up}, F); 
     else
         Fp = F;
     end
@@ -230,7 +230,7 @@ function itref(A::AbstractMatrix{TA},
                uw       = Float64, 
                ur       = Float64, 
                ug       = nothing, 
-               up       = nothing) where 
+               up       = ur) where 
         {TA<:AbstractFloat,TB<:AbstractFloat,TX<:AbstractFloat} 
     """Implementation of LU-IR3 and GMRES-IR5.
 
@@ -321,8 +321,7 @@ function itref(A::AbstractMatrix{TA},
     end      
                             
     if(isgmres)
-        if(up == nothing)
-            up = ur;
+        if(up == ur)
             Ap = Ar;
         elseif(up == eltype(A))
             Ap = A;
@@ -345,7 +344,7 @@ function itref(A::AbstractMatrix{TA},
     
     if F != nothing
         if(eltype(F) != uf)
-            Ff = convert(LU{uf,Array{uf,2}},F);
+            Ff = convert(LU{uf},F);
         else
             Ff = F;
         end
@@ -364,7 +363,7 @@ function itref(A::AbstractMatrix{TA},
         if(up == eltype(Ff));
             Fp = Ff;
         else
-            Fp = convert(LU{up,Array{up,2}},Ff);
+            Fp = convert(LU{up},Ff);
         end
     end
                                     
